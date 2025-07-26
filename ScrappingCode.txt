@@ -1,0 +1,61 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from bs4 import BeautifulSoup
+import csv
+import time
+
+# Set up headless browser
+options = Options()
+options.add_argument("--headless")
+driver = webdriver.Chrome(options=options)
+
+url = "https://hospitals.aku.edu/pakistan/patientservices/Pages/findadoctor.aspx"
+driver.get(url)
+time.sleep(3)
+
+all_doctors = []
+TOTAL_PAGES = 5  # Set how many pages to go through (adjust as needed)
+
+for current_page in range(1, TOTAL_PAGES + 1):
+    print(f"🔄 Scraping page {current_page}...")
+
+    # Let page fully load
+    time.sleep(3)
+    soup = BeautifulSoup(driver.page_source, "html.parser")
+
+    cards = soup.select("#shortcode1 .col-md-2")
+
+    for card in cards:
+        name = card.select_one("h4")
+        specialty = card.select_one(".ProfileSpeciality")
+        image = card.select_one("img")
+        profile_link = card.select_one("a[href*='profiles.aspx']")
+
+        all_doctors.append({
+            "Name": name.get_text(strip=True) if name else "",
+            "Specialty": specialty.get_text(strip=True) if specialty else "",
+            "Image": image["src"] if image else "",
+            "Profile Link": profile_link["href"] if profile_link else "",
+        })
+
+    # Move to next page if not last
+    if current_page < TOTAL_PAGES:
+        try:
+            next_page_xpath = f"//a[text()='{current_page + 1}']"
+            next_page_link = driver.find_element(By.XPATH, next_page_xpath)
+            driver.execute_script("arguments[0].click();", next_page_link)
+        except Exception as e:
+            print(f"❌ Failed to go to page {current_page + 1}: {e}")
+            break
+
+driver.quit()
+
+# Save to CSV
+with open("aku_doctors.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=["Name", "Specialty", "Image", "Profile Link"])
+    writer.writeheader()
+    writer.writerows(all_doctors)
+
+print(f"\n✅ Scraped {len(all_doctors)} doctors from {TOTAL_PAGES} pages.")
+print("📄 Saved to aku_doctors.csv")

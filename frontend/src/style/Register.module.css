@@ -1,0 +1,139 @@
+.registerContainer {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 128, 128, 0.3);
+  border: 1px solid #a0d8d8;
+  color: #004d4d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+      rgba(240, 248, 255, 0.85),
+      rgba(240, 248, 255, 0.85)
+    ),
+    url('https://images.unsplash.com/photo-1586772007324-5d5d1bcfa28c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')
+      no-repeat center center fixed;
+  background-size: cover;
+}
+
+h2 {
+  text-align: center;
+  color: #00796b; /* Teal/dark cyan */
+  margin-bottom: 25px;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px #cce7e7;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #00504a;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #e0f2f1; /* light teal */
+  border: 1px solid #00796b;
+  border-radius: 6px;
+  color: #004d4d;
+  font-size: 1rem;
+  transition: 0.3s all ease-in-out;
+}
+
+input:focus {
+  border-color: #004d4d;
+  outline: none;
+  box-shadow: 0 0 8px #004d4d99;
+}
+
+.genderOptions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.genderOptions label {
+  color: #004d4d;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.genderOptions input[type="radio"] {
+  accent-color: #00796b;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  margin-top: 30px;
+  padding: 14px;
+  background-color: #00796b; /* teal button */
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004d4d;
+}
+
+.Toastify__toast-container {
+  font-size: 0.9rem;
+}
+
+.my-2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.my-3 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.fullPageBackground {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      rgba(240, 248, 255, 0.85),
+      rgba(240, 248, 255, 0.85)
+    ),
+    url('https://images.unsplash.com/photo-1586772007324-5d5d1bcfa28c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')
+      no-repeat center center fixed;
+  background-size: cover;
+  padding: 20px;
+}
