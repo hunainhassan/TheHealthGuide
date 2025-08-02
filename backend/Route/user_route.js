@@ -4,6 +4,28 @@ let user_logic = require("../controller/user_logic");
 let User = require("../collection/User")
 
 
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client("461821241114-7dg2udvpgqq3qjogop859g9v6ge4s82a.apps.googleusercontent.com");
+
+r.post("/google-login", async (req, res) => {
+  const { token } = req.body;
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: "461821241114-7dg2udvpgqq3qjogop859g9v6ge4s82a.apps.googleusercontent.com",
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, picture } = payload;
+
+    // You can search for this user in DB or create a new one
+    const user = { email, name, picture };
+
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(401).json({ msg: "Invalid token" });
+  }
+});
 
 // -------- Existing Routes --------
 r.get('/userprofile/:id', async (req, res) => {

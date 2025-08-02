@@ -28,6 +28,7 @@ import StepList from './Component/Steplist';
 import WorkoutList from './Component/WorkoutList';
 import UpdateProfile from './Component/UpdateProfile';
 import LiaquatDoctors from './Component/Doctors';
+import History from './Component/History';
 
 
 
@@ -68,6 +69,9 @@ function App() {
 
           <Route path='/login' element={<Login />} />
           <Route path='/dashboard' element={<Main />} />
+          <Route path='/history' element={<History />} />
+
+          
             <Route path='/adminget' element={<Adminget />} />
               <Route path='/getuser' element={<ShowUser />} />
           <Route path='/pro' element={<ProgressForm />} />
